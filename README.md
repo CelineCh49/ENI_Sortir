@@ -20,7 +20,7 @@ Les sorties, ainsi que les participants sont rattachés à un campus pour perm
 1. **Cloner le dépôt**
 
    ```bash
-   git clone https://github.com/cedricdebailleul/ProjetEniSortir2.git
+   git clone https://github.com/CelineCh49/ENI_Sortir
    ```
 
 2. **Installer les dépendances**
