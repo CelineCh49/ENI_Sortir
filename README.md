@@ -20,7 +20,7 @@ Les sorties, ainsi que les participants sont rattachés à un campus pour perm
 1. **Cloner le dépôt**
 
    ```bash
-   git clone https://github.com/CelineCh49/ENI_Sortir
+   git clone https://github.com/CelineCh49/ENI_Sortir.git
    ```
 
 2. **Installer les dépendances**
