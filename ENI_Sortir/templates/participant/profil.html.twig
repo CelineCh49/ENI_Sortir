@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ parent() }}
+	| Profil organisateur
+{% endblock %}
+
+{% block body %}
+
+	<h1 class="text-2xl text-center font-bold mb-4">{{ participant.pseudo }}</h1>
+
+	<div class="flex justify-center">
+		<div
+			class="bg-white flex p-4 rounded mb-4 w-full max-w-screen-md">
+			<!-- Colonne de la photo -->
+			<div class="flex-none mr-6">
+				{# {% if participant.photo %} 
+								<img src="{{ asset('photos/' ~ participant.photo) }}" alt="Photo de profil" class="object-cover rounded-full h-24 w-24">
+							{% else %} #}
+				<!-- Si aucune photo n'est fournie, une photo générée via API (à remplacer par votre URL d'API) -->
+			<img
+src="https://thispersondoesnotexist.com/image" alt="Photo générée" class="object-cover rounded-full h-24 w-24">
+{# {% endif %} #}
+
+			</div>
+
+			<!-- Colonne des infos -->
+			<div class="flex-grow">
+				<p class="text-gray-600 mb-2">Prénom :
+					{{ participant.prenom }}</p>
+				<p class="text-gray-600 mb-2">Nom :
+					{{ participant.nom }}</p>
+				<p class="text-gray-600 mb-2">Téléphone :
+					{{ participant.telephone }}</p>
+				<p class="text-gray-600 mb-2">Email :
+					{{ participant.email }}</p>
+				<p class="text-gray-600 mb-2">Campus :
+					{{ participant.campus }}</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- Bouton retour -->
+	<div class="text-center">
+<a href="{{ app.request.headers.get('referer') }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" id="my_profil_cancel" title="Retour">Retour</a>
+
+	</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+

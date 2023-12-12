@@ -1,0 +1,4 @@
+<form id="publierForm" action="{{ path('sortie_publier', {'id': sortie.id}) }}" method="post">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('publier_sortie') }}">
+    <button type="submit" class="default_tertiary_button">Publier</button>
+</form>

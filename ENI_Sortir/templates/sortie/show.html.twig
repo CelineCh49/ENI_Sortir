@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sortie
+{% endblock %}
+
+{% block body %}
+	<h1 class="text-2xl font-semibold mb-4">Afficher une sortie</h1>
+
+	<div
+		class="affichage_infos grid md:grid-cols-2 gap-6 mb-6">
+		<!-- Left Column -->
+		<div class="left_col space-y-2">
+			<div>
+				<strong>Nom de la sortie:</strong>
+				{{ sortie.nom }}
+			</div>
+			<div>
+				<strong>Date et heure de la sortie:</strong>
+				{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('d/m/y H:i') : '' }}
+			</div>
+			<div>
+				<strong>Date limite d'inscription:</strong>
+				{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('d/m/y H:i') : '' }}
+			</div>
+			<div>
+				<strong>Nombre de places:</strong>
+				{{ sortie.nbInscriptionsMax }}
+			</div>
+			<div>
+				<strong>Durée:</strong>
+				{{ sortie.duree }}
+				minutes
+			</div>
+			<div>
+				<strong>Description et infos:</strong>
+				{{ sortie.infosSortie }}
+			</div>
+		</div>
+
+		<!-- Right Column -->
+		<div class="right_col space-y-2">
+			<div>
+				<strong>Campus:</strong>
+				{{ sortie.campus.nom }}</div>
+			<div>
+				<strong>Lieu:</strong>
+				{{ sortie.lieu.nom }}</div>
+			<div>
+				<strong>Rue:</strong>
+				{{ sortie.lieu.rue }}</div>
+			<div>
+				<strong>Ville:</strong>
+				{{ sortie.lieu.ville.nom }}</div>
+			<div>
+				<strong>Code Postal:</strong>
+				{{ sortie.lieu.ville.codePostal }}</div>
+			<div>
+				<strong>Latitude:</strong>
+				{{ sortie.lieu.latitude }}</div>
+			<div>
+				<strong>Longitude:</strong>
+				{{ sortie.lieu.longitude }}</div>
+		</div>
+	</div>
+
+	<div class="affichage_inscrits mb-6">
+		<h3 class="text-xl font-semibold mb-2">Liste des participants inscrits</h3>
+		<div class="liste_inscrits">
+			<table class="min-w-full bg-white border border-gray-300">
+				<thead>
+					<tr class="text-left border-b">
+						<th class="px-4 py-2">
+							<strong>Pseudo</strong>
+						</th>
+						<th class="px-4 py-2">
+							<strong>Nom</strong>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for inscrit in sortie.inscrits %}
+						<tr class="hover:bg-gray-100">
+<td class="px-4 py-2">
+	<a href="{{ path('participant_profil', { 'id': inscrit.id }) }}">{{ inscrit.pseudo }}</a>
+</td>
+
+<td class="px-4 py-2">
+	<a href="{{ path('participant_profil', { 'id': inscrit.id }) }}">{{inscrit.prenom}}
+		{{inscrit.nom}}</a>
+</td>
+
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="flex space-x-4">
+<a href="{{ path('app_sortie_index') }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded inline-flex items-center">
+
+			<span>Annuler</span>
+		</a>
+
+
+{# {% if app.user == sortie.organisateur %}
+
+<a href="{{ path('app_sortie_edit', {'id': sortie.id}) }}" class="text-blue-600 hover:text-blue-800">Modifier</a>
+{{ include('sortie/_delete_form.html.twig') }}
+
+
+{% endif %} #}
+	</div>
+
+{% endblock %}

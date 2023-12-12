@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Sortie
+{% endblock %}
+
+{% block body %}
+
+		<h1 class="text-2xl font-semibold mb-4">Edit Sortie</h1>
+
+		<div class="mb-4">
+			{{ include('sortie/_form.html.twig', {'button_label': 'Update'}) }}		
+		</div>
+
+			
+			
+		{% if app.user == sortie.organisateur %}
+			<div class="flex items-center space-x-4">
+				{{ include('inc/publier.html.twig') }}
+				{{ include('sortie/_delete_form.html.twig') }}
+				<a href="{{ app.request.headers.get('referer') }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded inline-flex items-center">
+					<span>Annuler</span>
+				</a>
+			</div>
+		{% endif %}
+{% endblock %}
+

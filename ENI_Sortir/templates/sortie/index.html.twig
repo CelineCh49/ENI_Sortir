@@ -1,0 +1,132 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Sorties
+{% endblock %}
+
+{% block body %}
+
+	<div class="mx-auto max-w-screen-xl p-4 sm:p-8">
+
+		{# zone de message flash #}
+		{% include 'inc/flash.html.twig'%}
+		{# zone de message flash #}
+
+		{# zone des infos participant connecté #}
+		<div class="flex justify-end items-end flex-col mb-6">
+			<div class="text-lg text-right">Date du jour:
+				<span class="font-medium">{{date('now') |date('d/m/Y')}}</span>
+			</div>
+			<div class="text-lg text-right mt-2">Participant:
+				<span class="font-medium">{{app.user.pseudo}}</span>
+			</div>
+		</div>
+		{# zone des infos participant connecté #}
+
+
+
+		{# zone de filtre #}
+		<div>
+			<h3>Filtrer les sorties</h3>
+			{% include 'inc/filter.html.twig'%}
+		</div>
+		{# zone de filtre #}
+
+
+		{# zone de tableau #}
+		<table class="min-w-full bg-white border rounded-md overflow-hidden">
+			{# zone de titre du tableau #}
+			<thead class="bg-gray-200">
+				<tr>
+					<th class="p-2">Nom de la sortie</th>
+					<th class="p-2">Date de la sortie</th>
+					<th class="p-2">clôture</th>
+					<th class="p-2">Inscrits/places</th>
+					<th class="p-2">Etat</th>
+					<th class="p-2">Inscrit</th>
+					<th class="p-2">Organisateur</th>
+					<th class="p-2">Actions</th>
+				</tr>
+			</thead>
+			{# zone de titre du tableau #}
+			<tbody>
+
+			{# ajout d'une variable pour afficher le message d'erreur si les sorties sont historisée #}
+			{% set sortiesValidesTrouvees = false %}
+
+
+				{# zone de boucle sur les sorties #}
+				{% for sortie in sorties %}
+					{% if sortie.etat.libelle != 'Historisée' %}
+						{% set sortiesValidesTrouvees = true %}
+
+						{% if sortie.etat.libelle != 'Créée' or app.user == sortie.organisateur %}
+							<tr class="border-b">
+								<td class="p-2">{{ sortie.nom }}</td>
+								<td class="p-2">{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('d/m/Y H:i') : '' }}</td>
+								<td class="p-2">{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('d/m/Y') : '' }}</td>
+								<td class="p-2">{{ sortie.inscrits.count }}/{{ sortie.nbInscriptionsMax }}</td>
+								<td class="p-2">{{ sortie.etat.libelle }}</td>
+								<td class="p-2 text-center">
+									{% if app.user in sortie.inscrits %}
+										X
+									{% endif %}
+								</td>
+<td class="p-2">
+	<a href="{{ path('participant_profil', { 'id': sortie.organisateur.id }) }}">{{ sortie.organisateur.pseudo }}</a></td>
+</td>
+
+								
+								{# Actions #}
+								<td class="p-2 space-x-2">
+									{# si organisateur #}
+									{% if app.user == sortie.organisateur %}
+										{% if sortie.etat.libelle == 'Créée' %}
+											<a href="{{ path('app_sortie_edit', {'id': sortie.id}) }}" class="text-blue-600 hover:text-blue-800">Modifier</a>
+											{% include('inc/publier.html.twig') %}
+										{% endif %}
+										{% if sortie.etat.libelle == 'Ouverte' or sortie.etat.libelle == 'Clôturée' %}
+											<a href="{{ path('app_sortie_cancel', {'id': sortie.id}) }}" class="text-red-600 hover:text-red-800">Annuler</a>
+											<a href="{{ path('app_sortie_show', {'id': sortie.id}) }}" class="text-green-600 hover:text-green-800">Afficher</a>
+										{% endif %}
+										{% if sortie.etat.libelle == 'Annulée'%}
+										<a href="{{ path('app_sortie_show', {'id': sortie.id}) }}" class="text-green-600 hover:text-green-800">Afficher</a>
+										{% endif %}
+
+									{# si pas organisateur #}
+									{% else %}
+										<a href="{{ path('app_sortie_show', {'id': sortie.id}) }}" class="text-green-600 hover:text-green-800">Afficher</a>
+										{% if app.user in sortie.inscrits and date('now') < sortie.dateLimiteInscription %}
+										{% endif %}
+									{% endif %}
+
+									{% if sortie.etat.libelle == 'Ouverte' and sortie.dateHeureDebut > date() and sortie.organisateur.id != app.user.id %}
+										<!-- Inscription / Désinscription en fonction de l'état de la sortie -->
+										{% if app.user in sortie.inscrits %}
+											{% include('inc/desister.html.twig') %}
+										{% else %}
+											{% include('inc/inscrire.html.twig') %}
+										{% endif %}
+									{% elseif sortie.etat.libelle == 'Clôturée' and sortie.dateHeureDebut > date() %}
+										{% if app.user in sortie.inscrits %}
+											{% include('inc/desister.html.twig') %}
+										{% endif %}
+									{% endif %}
+
+								</td> 
+							</tr>
+						{% endif %}
+					{% endif %}
+				{% endfor %}
+
+				{% if not sortiesValidesTrouvees %}
+					<tr>
+						<td colspan="8" class="p-2 text-center text-gray-500">Il n'y a pas de résultat pour votre recherche</td>
+					</tr>
+				{% endif %}
+			</tbody>
+		</table>
+		<div class="mt-6">
+			<a href="{{ path('app_sortie_new') }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Créer une sortie</a>
+		</div>
+	</div>
+{% endblock %}

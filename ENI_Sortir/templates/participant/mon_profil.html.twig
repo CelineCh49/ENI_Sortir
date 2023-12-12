@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil
+{% endblock %}
+
+{% block body %}
+		<h3 class="text-2xl font-semibold mb-4">Mon profil</h3>
+
+		{{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}
+
+		<div class="flex flex-col">
+			<label class="mb-1 font-medium">{{ form_label(form.pseudo) }}</label>
+			{{ form_widget(form.pseudo, {'attr': {'class': 'border p-2 rounded-md w-full'}}) }}
+		</div>
+
+		<div class="flex flex-col">
+			<label class="mb-1 font-medium">{{ form_label(form.nom) }}</label>
+			{{ form_widget(form.nom, {'attr': {'class': 'border p-2 rounded-md w-full'}}) }}
+		</div>
+
+		<div class="flex flex-col">
+			<label class="mb-1 font-medium">{{ form_label(form.prenom) }}</label>
+			{{ form_widget(form.prenom, {'attr': {'class': 'border p-2 rounded-md w-full'}}) }}
+		</div>
+
+		<div class="flex flex-col">
+			<label class="mb-1 font-medium">{{ form_label(form.email) }}</label>
+			{{ form_widget(form.email, {'attr': {'class': 'border p-2 rounded-md w-full'}}) }}
+		</div>
+
+		<div class="flex flex-col">
+			<label class="mb-1 font-medium">{{ form_label(form.telephone) }}</label>
+			{{ form_widget(form.telephone, {'attr': {'class': 'border p-2 rounded-md w-full'}}) }}
+		</div>
+
+		<div class="flex flex-col mb-4">
+			<label for="{{ form.motPasse.first.vars.id }}" class="mb-1 font-medium">{{ form_label(form.motPasse.first) }}</label>
+			{{ form_widget(form.motPasse.first, {'attr': {'class': 'border p-2 rounded-md w-full'}}) }}
+			{{ form_errors(form.motPasse.first) }}
+		</div>
+
+		<div class="flex flex-col mb-4">
+			<label for="{{ form.motPasse.second.vars.id }}" class="mb-1 font-medium">{{ form_label(form.motPasse.second) }}</label>
+			{{ form_widget(form.motPasse.second, {'attr': {'class': 'border p-2 rounded-md w-full'}}) }}
+			{{ form_errors(form.motPasse.second) }}
+		</div>
+
+
+
+		<!-- Add other form fields if necessary -->
+
+		<div class="mt-4">
+			<button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none">Mettre à jour</button>
+			<a href="{{ app.request.headers.get('referer') }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded inline-flex items-center">
+				<span>Annuler</span>
+			</a>
+		</div>
+
+		{{ form_end(form) }}
+
+{% endblock %}

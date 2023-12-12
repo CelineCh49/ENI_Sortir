@@ -1,0 +1,57 @@
+{{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}
+
+<div class="flex flex-col">
+	<label for="{{ form.nom.vars.id }}" class="mb-1 font-medium">{{ form.nom.vars.label }}</label>
+	{{ form_widget(form.nom, {'attr': {'class': 'border p-2 rounded-md w-full'}}) }}
+	{{ form_errors(form.nom) }}
+</div>
+
+<div class="flex flex-col">
+	<label for="{{ form.dateHeureDebut.vars.id }}" class="mb-1 font-medium">{{ form.dateHeureDebut.vars.label }}</label>
+	{{ form_widget(form.dateHeureDebut, {'attr': {'class': 'border p-2 rounded-md w-full'}}) }}
+	{{ form_errors(form.dateHeureDebut) }}
+</div>
+
+<div class="flex flex-col">
+	<label for="{{ form.dateLimiteInscription.vars.id }}" class="mb-1 font-medium">{{ form.dateLimiteInscription.vars.label }}</label>
+	{{ form_widget(form.dateLimiteInscription, {'attr': {'class': 'border p-2 rounded-md w-full'}}) }}
+	{{ form_errors(form.dateLimiteInscription) }}
+</div>
+
+<div class="flex flex-col">
+	<label for="{{ form.nbInscriptionsMax.vars.id }}" class="mb-1 font-medium">{{ form.nbInscriptionsMax.vars.label }}</label>
+	{{ form_widget(form.nbInscriptionsMax, {'attr': {'class': 'border p-2 rounded-md w-full'}}) }}
+	{{ form_errors(form.nbInscriptionsMax) }}
+</div>
+
+<div class="flex flex-col">
+	<label for="{{ form.duree.vars.id }}" class="mb-1 font-medium">{{ form.duree.vars.label }}</label>
+	{{ form_widget(form.duree, {'attr': {'class': 'border p-2 rounded-md w-full'}}) }}
+	{{ form_errors(form.duree) }}
+</div>
+
+<div class="flex flex-col">
+	<label for="{{ form.infosSortie.vars.id }}" class="mb-1 font-medium">{{ form.infosSortie.vars.label }}</label>
+	{{ form_widget(form.infosSortie, {'attr': {'class': 'border p-2 rounded-md w-full'}}) }}
+	{{ form_errors(form.infosSortie) }}
+</div>
+
+<div class="flex flex-col">
+	<label for="{{ form.ville.vars.id }}" class="mb-1 font-medium">{{ form.ville.vars.label }}</label>
+	{{ form_widget(form.ville, {'attr': {'class': 'border p-2 rounded-md w-full'}}) }}
+	{{ form_errors(form.ville) }}
+</div>
+
+<div class="flex flex-col">
+	<label for="{{ form.lieu.vars.id }}" class="mb-1 font-medium">{{ form.lieu.vars.label }}</label>
+	{{ form_widget(form.lieu, {'attr': {'class': 'border p-2 rounded-md w-full'}}) }}
+	{{ form_errors(form.lieu) }}
+</div>
+
+<div class="mt-4">
+	<button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none">Enregistrer</button>
+</div>
+
+{{ form_end(form) }}
+
+

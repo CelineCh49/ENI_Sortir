@@ -1,0 +1,44 @@
+{# zone de filtre #}
+<div class="mb-6 bg-gray-100 p-4 rounded-md">
+	<h3 class="text-xl font-semibold mb-2">Filtrer les sorties</h3>
+
+{{ form_start(form, {'attr': {'class': 'grid grid-cols-1 md:grid-cols-3 gap-6'}}) }}
+
+<!-- First Column: Campus, Query, Date Range -->
+<div class="space-y-4">
+	<div class="flex flex-col">
+		<label for="campus" class="mb-1 font-medium">Campus</label>
+		{{ form_widget(form.campus, {'attr': {'class': 'border p-2 rounded-md w-full'}}) }}
+	</div>
+	<div class="flex flex-col">
+		<label for="q" class="mb-1 font-medium">Le nom de la sortie contient :</label>
+		{{ form_widget(form.q, {'attr': {'class': 'border p-2 rounded-md w-full'}}) }}
+	</div>
+	<div class="flex space-x-2">
+		<div class="flex flex-col">
+			<label for="dateMin" class="mb-1 font-medium">Entre :</label>
+			{{ form_widget(form.dateMin, {'attr': {'class': 'border p-2 rounded-md'}}) }}
+		</div>
+		<div class="flex flex-col">
+			<label for="dateMax" class="mb-1 font-medium">Et :</label>
+			{{ form_widget(form.dateMax, {'attr': {'class': 'border p-2 rounded-md'}}) }}
+		</div>
+	</div>
+</div>
+
+<!-- Second Column: Checkboxes -->
+<div class="space-y-2">
+	{{ form_row(form.sortiesOrganisees, {'label_attr': {'class': 'font-medium'}, 'attr': {'class': 'form-checkbox h-5 w-5 text-blue-600'}}) }}
+	{{ form_row(form.sortiesInscrit, {'label_attr': {'class': 'font-medium'}, 'attr': {'class': 'form-checkbox h-5 w-5 text-blue-600'}}) }}
+	{{ form_row(form.sortiesPasInscrit, {'label_attr': {'class': 'font-medium'}, 'attr': {'class': 'form-checkbox h-5 w-5 text-blue-600'}}) }}
+	{{ form_row(form.sortiesPassee, {'label_attr': {'class': 'font-medium'}, 'attr': {'class': 'form-checkbox h-5 w-5 text-blue-600'}}) }}
+</div>
+
+<!-- Third Column: Search Button -->
+<div class="flex items-start justify-center">
+	<button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Rechercher</button>
+</div>
+
+{{ form_end(form) }}
+
+</div>

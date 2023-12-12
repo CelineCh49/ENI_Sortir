@@ -1,0 +1,61 @@
+<nav class="bg-white p-4 ">
+	<div class="container mx-auto flex justify-between items-center">
+		<a href="#" class="text-xl font-bold text-gray-800"><img class="h-8 w-auto" src="{{ asset('img/logoenisortir.svg') }}" alt="Sortir"></a>
+
+		<div class="hidden md:block">
+			{% if is_granted('ROLE_ADMIN') %}
+<a href="{{ path('app_sortie_index')}}" class=" text-gray-800 rounded-md px-3 py-2 text-sm font-medium">Villes</a>
+
+<a href="#" class="  text-gray-800 rounded-md px-3 py-2 text-sm font-medium">Campus</a>
+
+			{% endif %}
+
+			{# si le participant est connecté #}
+			{% if app.user %}
+<a href="{{ path('app_sortie_index')}}" class=" text-gray-800 rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Accueil</a>
+
+<a href="{{ path('mon_profil')}}" class=" text-gray-800 rounded-md px-3 py-2 text-sm font-medium">Profil</a>
+
+<a href="{{ path('logout')}}" class=" text-gray-800 rounded-md px-3 py-2 text-sm font-medium">Déconnexion</a>
+
+				{# si le participant n'est pas connecté #}
+			{% else %}
+<a href="{{ path('login')}}" class="bg-secondary-400 hover:bg-primary-600 text-gray-800 rounded-md px-3 py-2 text-sm font-medium">Connexion</a>
+
+			{% endif %}
+
+		</div>
+		<div class="md:hidden">
+			<button
+				id="menuButton" class="focus:outline-none">
+				<!-- Hamburger icon -->
+				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+					<path strokelinecap="round" strokelinejoin="round" strokewidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+				</svg>
+			</button>
+		</div>
+	</div>
+</nav>
+
+<!-- mobile menu -->
+<div id="mobileLinks" class="md:hidden">
+
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('app_sortie_index')}}" class="bg-secondary-400 hover:bg-primary-600 text-blue rounded-md px-3 py-2 text-sm font-medium">Villes</a>
+            <a href="#" class="bg-secondary-400 hover:bg-primary-600 text-blue rounded-md px-3 py-2 text-sm font-medium">Campus</a>
+        {% endif %}
+
+        {# si le participant est connecté #}
+        {% if app.user %}
+            <a href="{{ path('app_sortie_index')}}" class="bg-secondary-400 hover:bg-primary-600 text-blue rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Accueil</a>
+            <a href="{{ path('mon_profil')}}" class="bg-secondary-400 hover:bg-primary-600 text-blue rounded-md px-3 py-2 text-sm font-medium">Profil</a>
+            <a href="{{ path('logout')}}" class="bg-secondary-400 hover:bg-primary-600 text-blue rounded-md px-3 py-2 text-sm font-medium">Déconnexion</a>
+            {# si le participant n'est pas connecté #}
+        {% else %}
+            <a href="{{ path('login')}}" class="bg-secondary-400 hover:bg-primary-600 text-blue rounded-md px-3 py-2 text-sm font-medium">Connexion</a>
+        {% endif %}
+    </div>
+</div>
+
+
